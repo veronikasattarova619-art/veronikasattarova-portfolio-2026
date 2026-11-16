@@ -1,0 +1,1371 @@
+{
+ "me/portrait": {
+  "set": [
+   [
+    "me/portrait-700.webp",
+    700
+   ],
+   [
+    "me/portrait-1300.webp",
+    1300
+   ]
+  ],
+  "w": 1660,
+  "h": 2043,
+  "alpha": true
+ },
+ "yuma/cover": {
+  "set": [
+   [
+    "yuma/cover-1000.webp",
+    1000
+   ],
+   [
+    "yuma/cover-2000.webp",
+    2000
+   ]
+  ],
+  "w": 3200,
+  "h": 2000,
+  "alpha": false
+ },
+ "yuma/shop": {
+  "set": [
+   [
+    "yuma/shop-1000.webp",
+    1000
+   ],
+   [
+    "yuma/shop-2000.webp",
+    2000
+   ]
+  ],
+  "w": 3200,
+  "h": 2000,
+  "alpha": false
+ },
+ "yuma/before-menu": {
+  "set": [
+   [
+    "yuma/before-menu-1000.webp",
+    1000
+   ],
+   [
+    "yuma/before-menu-1363.webp",
+    1363
+   ]
+  ],
+  "w": 1363,
+  "h": 695,
+  "alpha": true
+ },
+ "yuma/after-menu": {
+  "set": [
+   [
+    "yuma/after-menu-1000.webp",
+    1000
+   ],
+   [
+    "yuma/after-menu-1600.webp",
+    1600
+   ]
+  ],
+  "w": 1600,
+  "h": 1025,
+  "alpha": true
+ },
+ "yuma/before-reports": {
+  "set": [
+   [
+    "yuma/before-reports-1000.webp",
+    1000
+   ],
+   [
+    "yuma/before-reports-1363.webp",
+    1363
+   ]
+  ],
+  "w": 1363,
+  "h": 1345,
+  "alpha": true
+ },
+ "yuma/after-reports": {
+  "set": [
+   [
+    "yuma/after-reports-1000.webp",
+    1000
+   ],
+   [
+    "yuma/after-reports-1600.webp",
+    1600
+   ]
+  ],
+  "w": 1600,
+  "h": 1025,
+  "alpha": true
+ },
+ "yuma/before-login": {
+  "set": [
+   [
+    "yuma/before-login-1000.webp",
+    1000
+   ],
+   [
+    "yuma/before-login-1363.webp",
+    1363
+   ]
+  ],
+  "w": 1363,
+  "h": 700,
+  "alpha": true
+ },
+ "yuma/after-login": {
+  "set": [
+   [
+    "yuma/after-login-1000.webp",
+    1000
+   ],
+   [
+    "yuma/after-login-1363.webp",
+    1363
+   ]
+  ],
+  "w": 1363,
+  "h": 818,
+  "alpha": true
+ },
+ "yuma/before-table": {
+  "set": [
+   [
+    "yuma/before-table-1000.webp",
+    1000
+   ],
+   [
+    "yuma/before-table-1363.webp",
+    1363
+   ]
+  ],
+  "w": 1363,
+  "h": 684,
+  "alpha": true
+ },
+ "yuma/before-popup": {
+  "set": [
+   [
+    "yuma/before-popup-1000.webp",
+    1000
+   ],
+   [
+    "yuma/before-popup-1363.webp",
+    1363
+   ]
+  ],
+  "w": 1363,
+  "h": 651,
+  "alpha": true
+ },
+ "yuma/ds-colors": {
+  "set": [
+   [
+    "yuma/ds-colors-800.webp",
+    800
+   ],
+   [
+    "yuma/ds-colors-1196.webp",
+    1196
+   ]
+  ],
+  "w": 1196,
+  "h": 2374,
+  "alpha": true
+ },
+ "yuma/ds-semantic": {
+  "set": [
+   [
+    "yuma/ds-semantic-640.webp",
+    640
+   ]
+  ],
+  "w": 640,
+  "h": 2400,
+  "alpha": true
+ },
+ "yuma/ds-typography": {
+  "set": [
+   [
+    "yuma/ds-typography-800.webp",
+    800
+   ],
+   [
+    "yuma/ds-typography-1196.webp",
+    1196
+   ]
+  ],
+  "w": 1196,
+  "h": 908,
+  "alpha": true
+ },
+ "yuma/ds-inputs": {
+  "set": [
+   [
+    "yuma/ds-inputs-800.webp",
+    800
+   ]
+  ],
+  "w": 800,
+  "h": 2249,
+  "alpha": true
+ },
+ "yuma/ds-desclist": {
+  "set": [
+   [
+    "yuma/ds-desclist-800.webp",
+    800
+   ]
+  ],
+  "w": 800,
+  "h": 1390,
+  "alpha": true
+ },
+ "yuma/ds-checkbox": {
+  "set": [
+   [
+    "yuma/ds-checkbox-800.webp",
+    800
+   ]
+  ],
+  "w": 800,
+  "h": 1243,
+  "alpha": true
+ },
+ "yuma/ds-tooltip": {
+  "set": [
+   [
+    "yuma/ds-tooltip-800.webp",
+    800
+   ]
+  ],
+  "w": 800,
+  "h": 973,
+  "alpha": true
+ },
+ "yuma/ds-multiselect": {
+  "set": [
+   [
+    "yuma/ds-multiselect-1200.webp",
+    1200
+   ],
+   [
+    "yuma/ds-multiselect-2400.webp",
+    2400
+   ]
+  ],
+  "w": 2400,
+  "h": 871,
+  "alpha": true
+ },
+ "yuma/ds-icons": {
+  "set": [
+   [
+    "yuma/ds-icons-1000.webp",
+    1000
+   ],
+   [
+    "yuma/ds-icons-1363.webp",
+    1363
+   ]
+  ],
+  "w": 1363,
+  "h": 666,
+  "alpha": true
+ },
+ "yuma/ds-icons-detailed": {
+  "set": [
+   [
+    "yuma/ds-icons-detailed-1000.webp",
+    1000
+   ],
+   [
+    "yuma/ds-icons-detailed-1363.webp",
+    1363
+   ]
+  ],
+  "w": 1363,
+  "h": 762,
+  "alpha": true
+ },
+ "kvas/feast": {
+  "set": [
+   [
+    "kvas/feast-900.webp",
+    900
+   ],
+   [
+    "kvas/feast-1800.webp",
+    1800
+   ]
+  ],
+  "w": 1920,
+  "h": 1405,
+  "alpha": false
+ },
+ "kvas/legend": {
+  "set": [
+   [
+    "kvas/legend-900.webp",
+    900
+   ],
+   [
+    "kvas/legend-1800.webp",
+    1800
+   ]
+  ],
+  "w": 1921,
+  "h": 1136,
+  "alpha": false
+ },
+ "kvas/riders": {
+  "set": [
+   [
+    "kvas/riders-900.webp",
+    900
+   ],
+   [
+    "kvas/riders-1800.webp",
+    1800
+   ]
+  ],
+  "w": 1920,
+  "h": 1351,
+  "alpha": false
+ },
+ "kvas/can-grape": {
+  "set": [
+   [
+    "kvas/can-grape-900.webp",
+    900
+   ],
+   [
+    "kvas/can-grape-1800.webp",
+    1800
+   ]
+  ],
+  "w": 1856,
+  "h": 2304,
+  "alpha": false
+ },
+ "kvas/can-apple": {
+  "set": [
+   [
+    "kvas/can-apple-900.webp",
+    900
+   ],
+   [
+    "kvas/can-apple-1800.webp",
+    1800
+   ]
+  ],
+  "w": 1856,
+  "h": 2304,
+  "alpha": false
+ },
+ "kvas/can-melon": {
+  "set": [
+   [
+    "kvas/can-melon-900.webp",
+    900
+   ],
+   [
+    "kvas/can-melon-1800.webp",
+    1800
+   ]
+  ],
+  "w": 1856,
+  "h": 2304,
+  "alpha": false
+ },
+ "kvas/can-pinkman": {
+  "set": [
+   [
+    "kvas/can-pinkman-900.webp",
+    900
+   ],
+   [
+    "kvas/can-pinkman-1800.webp",
+    1800
+   ]
+  ],
+  "w": 1857,
+  "h": 2304,
+  "alpha": false
+ },
+ "kvas/knight-apple": {
+  "set": [
+   [
+    "kvas/knight-apple-900.webp",
+    900
+   ],
+   [
+    "kvas/knight-apple-1800.webp",
+    1800
+   ]
+  ],
+  "w": 1856,
+  "h": 2310,
+  "alpha": false
+ },
+ "kvas/knight-melon": {
+  "set": [
+   [
+    "kvas/knight-melon-900.webp",
+    900
+   ],
+   [
+    "kvas/knight-melon-1800.webp",
+    1800
+   ]
+  ],
+  "w": 1872,
+  "h": 2310,
+  "alpha": false
+ },
+ "kvas/knight-pinkman": {
+  "set": [
+   [
+    "kvas/knight-pinkman-900.webp",
+    900
+   ],
+   [
+    "kvas/knight-pinkman-1800.webp",
+    1800
+   ]
+  ],
+  "w": 1856,
+  "h": 2304,
+  "alpha": false
+ },
+ "kvas/knight-grape": {
+  "set": [
+   [
+    "kvas/knight-grape-900.webp",
+    900
+   ],
+   [
+    "kvas/knight-grape-1800.webp",
+    1800
+   ]
+  ],
+  "w": 1856,
+  "h": 2304,
+  "alpha": false
+ },
+ "kvas/model-1": {
+  "set": [
+   [
+    "kvas/model-1-1000.webp",
+    1000
+   ],
+   [
+    "kvas/model-1-2000.webp",
+    2000
+   ]
+  ],
+  "w": 3674,
+  "h": 1774,
+  "alpha": false
+ },
+ "kvas/model-2": {
+  "set": [
+   [
+    "kvas/model-2-1000.webp",
+    1000
+   ],
+   [
+    "kvas/model-2-2000.webp",
+    2000
+   ]
+  ],
+  "w": 3860,
+  "h": 1914,
+  "alpha": false
+ },
+ "kvas/model-3": {
+  "set": [
+   [
+    "kvas/model-3-1000.webp",
+    1000
+   ],
+   [
+    "kvas/model-3-2000.webp",
+    2000
+   ]
+  ],
+  "w": 3814,
+  "h": 1821,
+  "alpha": false
+ },
+ "kvas/model-4": {
+  "set": [
+   [
+    "kvas/model-4-1000.webp",
+    1000
+   ],
+   [
+    "kvas/model-4-2000.webp",
+    2000
+   ]
+  ],
+  "w": 3788,
+  "h": 1746,
+  "alpha": false
+ },
+ "kvas/still-velvet": {
+  "set": [
+   [
+    "kvas/still-velvet-900.webp",
+    900
+   ],
+   [
+    "kvas/still-velvet-1800.webp",
+    1800
+   ]
+  ],
+  "w": 1921,
+  "h": 2520,
+  "alpha": false
+ },
+ "kvas/still-grape": {
+  "set": [
+   [
+    "kvas/still-grape-900.webp",
+    900
+   ],
+   [
+    "kvas/still-grape-1458.webp",
+    1458
+   ]
+  ],
+  "w": 1458,
+  "h": 883,
+  "alpha": false
+ },
+ "kvas/still-all": {
+  "set": [
+   [
+    "kvas/still-all-900.webp",
+    900
+   ],
+   [
+    "kvas/still-all-1348.webp",
+    1348
+   ]
+  ],
+  "w": 1348,
+  "h": 862,
+  "alpha": false
+ },
+ "kvas/still-pinkman": {
+  "set": [
+   [
+    "kvas/still-pinkman-900.webp",
+    900
+   ],
+   [
+    "kvas/still-pinkman-1081.webp",
+    1081
+   ]
+  ],
+  "w": 1081,
+  "h": 922,
+  "alpha": false
+ },
+ "kvas/hand-can": {
+  "set": [
+   [
+    "kvas/hand-can-900.webp",
+    900
+   ],
+   [
+    "kvas/hand-can-1560.webp",
+    1560
+   ]
+  ],
+  "w": 1560,
+  "h": 2140,
+  "alpha": false
+ },
+ "kvas/goblet": {
+  "set": [
+   [
+    "kvas/goblet-780.webp",
+    780
+   ]
+  ],
+  "w": 780,
+  "h": 944,
+  "alpha": false
+ },
+ "kvas/layout-grape": {
+  "set": [
+   [
+    "kvas/layout-grape-900.webp",
+    900
+   ],
+   [
+    "kvas/layout-grape-1800.webp",
+    1800
+   ]
+  ],
+  "w": 1920,
+  "h": 1282,
+  "alpha": false
+ },
+ "kvas/layout-apple-melon": {
+  "set": [
+   [
+    "kvas/layout-apple-melon-900.webp",
+    900
+   ],
+   [
+    "kvas/layout-apple-melon-1800.webp",
+    1800
+   ]
+  ],
+  "w": 1920,
+  "h": 1282,
+  "alpha": false
+ },
+ "kvas/layout-pinkman": {
+  "set": [
+   [
+    "kvas/layout-pinkman-900.webp",
+    900
+   ],
+   [
+    "kvas/layout-pinkman-1800.webp",
+    1800
+   ]
+  ],
+  "w": 1920,
+  "h": 1282,
+  "alpha": false
+ },
+ "kvas/layout-still": {
+  "set": [
+   [
+    "kvas/layout-still-900.webp",
+    900
+   ],
+   [
+    "kvas/layout-still-1800.webp",
+    1800
+   ]
+  ],
+  "w": 1920,
+  "h": 1266,
+  "alpha": false
+ },
+ "kvas/layout-still-2": {
+  "set": [
+   [
+    "kvas/layout-still-2-900.webp",
+    900
+   ],
+   [
+    "kvas/layout-still-2-1800.webp",
+    1800
+   ]
+  ],
+  "w": 1920,
+  "h": 1231,
+  "alpha": false
+ },
+ "kvas/layout-tent": {
+  "set": [
+   [
+    "kvas/layout-tent-900.webp",
+    900
+   ],
+   [
+    "kvas/layout-tent-1800.webp",
+    1800
+   ]
+  ],
+  "w": 1920,
+  "h": 1266,
+  "alpha": false
+ },
+ "kvas/toast": {
+  "set": [
+   [
+    "kvas/toast-900.webp",
+    900
+   ],
+   [
+    "kvas/toast-1800.webp",
+    1800
+   ]
+  ],
+  "w": 1920,
+  "h": 1179,
+  "alpha": false
+ },
+ "kvas/knights": {
+  "set": [
+   [
+    "kvas/knights-900.webp",
+    900
+   ],
+   [
+    "kvas/knights-1800.webp",
+    1800
+   ]
+  ],
+  "w": 1920,
+  "h": 1058,
+  "alpha": false
+ },
+ "kvas/battle": {
+  "set": [
+   [
+    "kvas/battle-900.webp",
+    900
+   ],
+   [
+    "kvas/battle-1800.webp",
+    1800
+   ]
+  ],
+  "w": 1920,
+  "h": 1266,
+  "alpha": false
+ },
+ "kvas/tent": {
+  "set": [
+   [
+    "kvas/tent-900.webp",
+    900
+   ],
+   [
+    "kvas/tent-1471.webp",
+    1471
+   ]
+  ],
+  "w": 1471,
+  "h": 1025,
+  "alpha": false
+ },
+ "tsenny/box": {
+  "set": [
+   [
+    "tsenny/box-900.webp",
+    900
+   ],
+   [
+    "tsenny/box-1800.webp",
+    1800
+   ]
+  ],
+  "w": 3267,
+  "h": 2372,
+  "alpha": true
+ },
+ "tsenny/board": {
+  "set": [
+   [
+    "tsenny/board-900.webp",
+    900
+   ],
+   [
+    "tsenny/board-1168.webp",
+    1168
+   ]
+  ],
+  "w": 1168,
+  "h": 860,
+  "alpha": false
+ },
+ "tsenny/cards-flying": {
+  "set": [
+   [
+    "tsenny/cards-flying-1000.webp",
+    1000
+   ],
+   [
+    "tsenny/cards-flying-1494.webp",
+    1494
+   ]
+  ],
+  "w": 1494,
+  "h": 717,
+  "alpha": true
+ },
+ "tsenny/tokens": {
+  "src": "tsenny/tokens.webp",
+  "w": 1611,
+  "h": 368,
+  "anim": true
+ },
+ "tsenny/concept": {
+  "src": "tsenny/concept.webp",
+  "w": 1600,
+  "h": 866,
+  "anim": true
+ },
+ "tsenny/booklet": {
+  "set": [
+   [
+    "tsenny/booklet-900.webp",
+    900
+   ],
+   [
+    "tsenny/booklet-1692.webp",
+    1692
+   ]
+  ],
+  "w": 1692,
+  "h": 1206,
+  "alpha": false
+ },
+ "tsenny/ref-scratch": {
+  "set": [
+   [
+    "tsenny/ref-scratch-800.webp",
+    800
+   ]
+  ],
+  "w": 1920,
+  "h": 1351,
+  "alpha": false
+ },
+ "tsenny/ref-illustrated": {
+  "set": [
+   [
+    "tsenny/ref-illustrated-800.webp",
+    800
+   ]
+  ],
+  "w": 2000,
+  "h": 1271,
+  "alpha": false
+ },
+ "tsenny/playing": {
+  "set": [
+   [
+    "tsenny/playing-900.webp",
+    900
+   ],
+   [
+    "tsenny/playing-1480.webp",
+    1480
+   ]
+  ],
+  "w": 1480,
+  "h": 1832,
+  "alpha": false
+ },
+ "tsenny/card-photo-human": {
+  "set": [
+   [
+    "tsenny/card-photo-human-900.webp",
+    900
+   ],
+   [
+    "tsenny/card-photo-human-1120.webp",
+    1120
+   ]
+  ],
+  "w": 1120,
+  "h": 1182,
+  "alpha": false
+ },
+ "tsenny/card-photo-decency": {
+  "set": [
+   [
+    "tsenny/card-photo-decency-554.webp",
+    554
+   ]
+  ],
+  "w": 554,
+  "h": 646,
+  "alpha": false
+ },
+ "tsenny/card-photo-passion": {
+  "set": [
+   [
+    "tsenny/card-photo-passion-551.webp",
+    551
+   ]
+  ],
+  "w": 551,
+  "h": 647,
+  "alpha": false
+ },
+ "tsenny/tokens-board": {
+  "set": [
+   [
+    "tsenny/tokens-board-900.webp",
+    900
+   ],
+   [
+    "tsenny/tokens-board-1800.webp",
+    1800
+   ]
+  ],
+  "w": 2188,
+  "h": 1287,
+  "alpha": false
+ },
+ "tsenny/tokens-board-2": {
+  "set": [
+   [
+    "tsenny/tokens-board-2-686.webp",
+    686
+   ]
+  ],
+  "w": 686,
+  "h": 1287,
+  "alpha": false
+ },
+ "tsenny/token-closeup": {
+  "set": [
+   [
+    "tsenny/token-closeup-900.webp",
+    900
+   ],
+   [
+    "tsenny/token-closeup-1800.webp",
+    1800
+   ]
+  ],
+  "w": 2216,
+  "h": 885,
+  "alpha": false
+ },
+ "tsenny/board-detail": {
+  "set": [
+   [
+    "tsenny/board-detail-900.webp",
+    900
+   ],
+   [
+    "tsenny/board-detail-1800.webp",
+    1800
+   ]
+  ],
+  "w": 2560,
+  "h": 1440,
+  "alpha": false
+ },
+ "tsenny/city-3d": {
+  "set": [
+   [
+    "tsenny/city-3d-900.webp",
+    900
+   ],
+   [
+    "tsenny/city-3d-1800.webp",
+    1800
+   ]
+  ],
+  "w": 1920,
+  "h": 1080,
+  "alpha": false
+ },
+ "tsenny/map-v2": {
+  "set": [
+   [
+    "tsenny/map-v2-900.webp",
+    900
+   ],
+   [
+    "tsenny/map-v2-1800.webp",
+    1800
+   ]
+  ],
+  "w": 2390,
+  "h": 1593,
+  "alpha": false
+ },
+ "tsenny/card-decency-1": {
+  "set": [
+   [
+    "tsenny/card-decency-1-699.webp",
+    699
+   ]
+  ],
+  "w": 699,
+  "h": 1061,
+  "alpha": true
+ },
+ "tsenny/card-decency-2": {
+  "set": [
+   [
+    "tsenny/card-decency-2-697.webp",
+    697
+   ]
+  ],
+  "w": 697,
+  "h": 1063,
+  "alpha": true
+ },
+ "tsenny/card-passion-1": {
+  "set": [
+   [
+    "tsenny/card-passion-1-699.webp",
+    699
+   ]
+  ],
+  "w": 699,
+  "h": 1061,
+  "alpha": true
+ },
+ "tsenny/card-passion-2": {
+  "set": [
+   [
+    "tsenny/card-passion-2-697.webp",
+    697
+   ]
+  ],
+  "w": 697,
+  "h": 1063,
+  "alpha": true
+ },
+ "tsenny/card-human-1": {
+  "set": [
+   [
+    "tsenny/card-human-1-699.webp",
+    699
+   ]
+  ],
+  "w": 699,
+  "h": 1061,
+  "alpha": true
+ },
+ "tsenny/card-human-2": {
+  "set": [
+   [
+    "tsenny/card-human-2-697.webp",
+    697
+   ]
+  ],
+  "w": 697,
+  "h": 1063,
+  "alpha": true
+ },
+ "smile/cover": {
+  "set": [
+   [
+    "smile/cover-1000.webp",
+    1000
+   ],
+   [
+    "smile/cover-2000.webp",
+    2000
+   ]
+  ],
+  "w": 3200,
+  "h": 2000,
+  "alpha": false
+ },
+ "smile/phones": {
+  "set": [
+   [
+    "smile/phones-1000.webp",
+    1000
+   ],
+   [
+    "smile/phones-2000.webp",
+    2000
+   ]
+  ],
+  "w": 3200,
+  "h": 1800,
+  "alpha": false
+ },
+ "smile/hero": {
+  "set": [
+   [
+    "smile/hero-1000.webp",
+    1000
+   ],
+   [
+    "smile/hero-2000.webp",
+    2000
+   ]
+  ],
+  "w": 2880,
+  "h": 1800,
+  "alpha": false
+ },
+ "smile/problem": {
+  "set": [
+   [
+    "smile/problem-1000.webp",
+    1000
+   ],
+   [
+    "smile/problem-2000.webp",
+    2000
+   ]
+  ],
+  "w": 2880,
+  "h": 1548,
+  "alpha": false
+ },
+ "smile/audiences": {
+  "set": [
+   [
+    "smile/audiences-1000.webp",
+    1000
+   ],
+   [
+    "smile/audiences-2000.webp",
+    2000
+   ]
+  ],
+  "w": 2880,
+  "h": 784,
+  "alpha": false
+ },
+ "smile/path": {
+  "set": [
+   [
+    "smile/path-1000.webp",
+    1000
+   ],
+   [
+    "smile/path-2000.webp",
+    2000
+   ]
+  ],
+  "w": 2880,
+  "h": 1482,
+  "alpha": false
+ },
+ "smile/channels": {
+  "set": [
+   [
+    "smile/channels-1000.webp",
+    1000
+   ],
+   [
+    "smile/channels-2000.webp",
+    2000
+   ]
+  ],
+  "w": 2880,
+  "h": 1478,
+  "alpha": false
+ },
+ "smile/services": {
+  "set": [
+   [
+    "smile/services-1000.webp",
+    1000
+   ],
+   [
+    "smile/services-2000.webp",
+    2000
+   ]
+  ],
+  "w": 2880,
+  "h": 1912,
+  "alpha": false
+ },
+ "smile/benefits": {
+  "set": [
+   [
+    "smile/benefits-1000.webp",
+    1000
+   ],
+   [
+    "smile/benefits-2000.webp",
+    2000
+   ]
+  ],
+  "w": 2880,
+  "h": 1400,
+  "alpha": false
+ },
+ "smile/process": {
+  "set": [
+   [
+    "smile/process-1000.webp",
+    1000
+   ],
+   [
+    "smile/process-2000.webp",
+    2000
+   ]
+  ],
+  "w": 2880,
+  "h": 1586,
+  "alpha": false
+ },
+ "smile/cases": {
+  "set": [
+   [
+    "smile/cases-1000.webp",
+    1000
+   ],
+   [
+    "smile/cases-2000.webp",
+    2000
+   ]
+  ],
+  "w": 2880,
+  "h": 928,
+  "alpha": false
+ },
+ "smile/lead": {
+  "set": [
+   [
+    "smile/lead-1000.webp",
+    1000
+   ],
+   [
+    "smile/lead-2000.webp",
+    2000
+   ]
+  ],
+  "w": 2880,
+  "h": 1040,
+  "alpha": false
+ },
+ "smile/faq": {
+  "set": [
+   [
+    "smile/faq-1000.webp",
+    1000
+   ],
+   [
+    "smile/faq-2000.webp",
+    2000
+   ]
+  ],
+  "w": 2880,
+  "h": 944,
+  "alpha": false
+ },
+ "smile/before-problem": {
+  "set": [
+   [
+    "smile/before-problem-1000.webp",
+    1000
+   ],
+   [
+    "smile/before-problem-1535.webp",
+    1535
+   ]
+  ],
+  "w": 1535,
+  "h": 1024,
+  "alpha": false
+ },
+ "smile/services-raw": {
+  "set": [
+   [
+    "smile/services-raw-1000.webp",
+    1000
+   ],
+   [
+    "smile/services-raw-1067.webp",
+    1067
+   ]
+  ],
+  "w": 1067,
+  "h": 387,
+  "alpha": true
+ },
+ "smile/services-grouped": {
+  "set": [
+   [
+    "smile/services-grouped-1000.webp",
+    1000
+   ],
+   [
+    "smile/services-grouped-1019.webp",
+    1019
+   ]
+  ],
+  "w": 1019,
+  "h": 536,
+  "alpha": true
+ },
+ "studyspace/cover": {
+  "set": [
+   [
+    "studyspace/cover-1000.webp",
+    1000
+   ],
+   [
+    "studyspace/cover-1280.webp",
+    1280
+   ]
+  ],
+  "w": 1280,
+  "h": 720,
+  "alpha": false
+ },
+ "studyspace/library": {
+  "set": [
+   [
+    "studyspace/library-1000.webp",
+    1000
+   ],
+   [
+    "studyspace/library-2000.webp",
+    2000
+   ]
+  ],
+  "w": 2560,
+  "h": 1440,
+  "alpha": false
+ },
+ "studyspace/course": {
+  "set": [
+   [
+    "studyspace/course-1000.webp",
+    1000
+   ],
+   [
+    "studyspace/course-2000.webp",
+    2000
+   ]
+  ],
+  "w": 2560,
+  "h": 1440,
+  "alpha": false
+ },
+ "studyspace/import": {
+  "set": [
+   [
+    "studyspace/import-1000.webp",
+    1000
+   ],
+   [
+    "studyspace/import-2000.webp",
+    2000
+   ]
+  ],
+  "w": 2560,
+  "h": 1440,
+  "alpha": false
+ },
+ "studyspace/mobile": {
+  "set": [
+   [
+    "studyspace/mobile-1000.webp",
+    1000
+   ],
+   [
+    "studyspace/mobile-2000.webp",
+    2000
+   ]
+  ],
+  "w": 2560,
+  "h": 1440,
+  "alpha": false
+ }
+}
