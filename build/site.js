@@ -35,7 +35,6 @@ function img(key, o = {}) {
   const srcset = m.set.map(([f, sw]) => `assets/img/${f} ${sw}w`).join(', ');
   return `<img src="assets/img/${m.set[0][0]}" srcset="${srcset}" sizes="${o.sizes || SIZES.full}" width="${w}" height="${h}" alt="${alt}" ${lazy} decoding="async"${cls}>`;
 }
-const ratio = (key) => `${M[key].w} / ${M[key].h}`;
 const largest = (key) => { const m = M[key]; return 'assets/img/' + (m.anim ? m.src : m.set[m.set.length - 1][0]); };
 
 // фигура: картинка + подпись, по клику увеличивается
@@ -46,29 +45,17 @@ function fig(key, o = {}) {
   if (o.browser) media = `<div class="browser"><div class="browser__bar"><i></i><i></i><i></i><span>${esc(o.browser)}</span></div>${media}</div>`;
   const mcls = ['fig__media', o.frame ? 'fig__media--frame' : '', o.dark ? 'fig__media--dark' : ''].filter(Boolean).join(' ');
   const cap = o.cap ? `<figcaption>${nb(o.cap)}</figcaption>` : '';
-  return `<figure class="fig ${col}" data-reveal><div class="${mcls}" data-zoom>${media}</div>${cap}</figure>`;
+  return `<figure class="fig ${col}${o.cls ? ' ' + o.cls : ''}" data-reveal><div class="${mcls}" data-zoom>${media}</div>${cap}</figure>`;
 }
-const figs = (...items) => `<div class="figs">${items.join('')}</div>`;
+const figs = (...items) => `<div class="grid figs">${items.join('')}</div>`;
 
-function ba(before, after, o = {}) {
-  return `<figure class="fig ${o.col || 'c-12'}" data-reveal>
-  <div class="ba" style="aspect-ratio:${ratio(after)}">
-    <div class="ba__after">${img(after, { alt: 'После: ' + (o.alt || ''), sizes: SIZES.wide })}</div>
-    <div class="ba__before">${img(before, { alt: 'До: ' + (o.alt || ''), sizes: SIZES.wide })}</div>
-    <div class="ba__handle" aria-hidden="true"></div>
-    <span class="ba__tag ba__tag--l">До</span><span class="ba__tag ba__tag--r">После</span>
-    <input type="range" min="0" max="100" value="50" aria-label="Сравнить до и после: ${esc(o.alt || '')}">
-  </div>
-  ${o.cap ? `<figcaption>${nb(o.cap)}</figcaption>` : ''}
-</figure>`;
-}
-
-// раздел кейса; id и подпись собираются в оглавление
+// раздел кейса: одна линия на всю ширину, подпись слева, текст справа, картинки под ним
 function block(n, label, body, o = {}) {
-  const id = 's' + n;
-  return `<section id="${id}">
-  <div class="sec-title" data-reveal><span class="n">${n}</span><h2>${label}</h2></div>
-  <div class="prose" data-reveal>${body}</div>
+  return `<section class="block wrap${o.night ? ' night block--night' : ''}" id="s${n}">
+  <div class="grid block__row hr">
+    <div class="block__label t-label" data-reveal><span class="n">${n}</span><span>${label}</span></div>
+    <div class="block__body" data-reveal>${body}</div>
+  </div>
   ${o.after || ''}
 </section>`;
 }
@@ -95,7 +82,7 @@ const NAV = [
   ['index.html#work', '01', 'Работы', 'work'],
   ['index.html#about', '02', 'Обо мне', 'about'],
   ['price.html', '03', 'Услуги и цены', 'price'],
-  ['index.html#contact', '04', 'Контакты', 'contact'],
+  ['#contact', '04', 'Контакты', 'contact'],
 ];
 function layout({ file, title, description, body, current, ogImage }) {
   const og = SITE + largest(ogImage || 'yuma/cover');
@@ -107,7 +94,7 @@ function layout({ file, title, description, body, current, ogImage }) {
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
-<meta name="theme-color" content="#f2f1ed">
+<meta name="theme-color" content="#e9e7e2">
 <meta property="og:type" content="website">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
@@ -125,167 +112,153 @@ function layout({ file, title, description, body, current, ogImage }) {
 <a class="skip" href="#main">К содержанию</a>
 <div class="page-fade" aria-hidden="true"></div>
 <header class="header">
-  <div class="frame">
-    <a class="header__name" href="index.html"><i aria-hidden="true"></i>Вероника Саттарова</a>
+  <div class="wrap grid">
+    <a class="header__name" href="index.html">Вероника Саттарова</a>
     <nav class="nav" aria-label="Основная навигация">
-      ${NAV.map(([h, n, t, k]) => `<a href="${h}"${current === k ? ' aria-current="page"' : ''}><span class="n">(${n})</span>${t}</a>`).join('\n      ')}
+      ${NAV.map(([h, n, t, k]) => `<a href="${h}"${current === k ? ' aria-current="page"' : ''}><span class="n">${n}</span>${t}</a>`).join('\n      ')}
     </nav>
-    <a class="header__cta" href="${TG}" target="_blank" rel="noopener">Написать в Telegram <span class="arr">↗</span></a>
+    <div class="header__cta"><span class="status"><i></i>Открыта к проектам</span><a class="btn btn--sm" href="${TG}" target="_blank" rel="noopener">Написать <span class="arr">↗</span></a></div>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav">Меню</button>
   </div>
   <nav class="mnav" id="mnav" aria-label="Меню">
-    ${NAV.map(([h, n, t]) => `<a href="${h}">${t}<span class="n">(${n})</span></a>`).join('\n    ')}
-    <a href="${TG}" target="_blank" rel="noopener">Написать в Telegram <span>↗</span></a>
+    ${NAV.map(([h, n, t]) => `<a href="${h}">${t}<span class="n">${n}</span></a>`).join('\n    ')}
+    <a class="btn btn--blue" href="${TG}" target="_blank" rel="noopener">Написать в Telegram ↗</a>
   </nav>
 </header>
 <main id="main">
 ${body}
 </main>
-<footer class="footer">
-  <div class="frame">
-    <span>© <span data-year>2026</span> Вероника Саттарова — графический и UI-дизайнер</span>
-    <span><a href="${TG}" target="_blank" rel="noopener">Telegram</a> · <a href="${BEHANCE}" target="_blank" rel="noopener">Behance</a> · <a href="${DPROFILE}" target="_blank" rel="noopener">Dprofile</a></span>
-    <button type="button" data-top>Наверх ↑</button>
-  </div>
-</footer>
+${contactFooter()}
 </body>
 </html>
 `;
 }
 
-function contactsBlock() {
-  return `<section class="section" id="contact">
-  <div class="shead">
-    <div><span class="label n">(04) Контакты</span><h2 class="h2" data-reveal>Обсудим ваш проект?</h2></div>
-    <p data-reveal>${nb('Опишите задачу в паре предложений — задам уточняющие вопросы и назову сроки и стоимость.')}</p>
+function contactFooter() {
+  return `<footer class="night contact" id="contact">
+  <div class="wrap">
+    <div class="shead__label t-label hr" style="padding-top:12px" data-reveal><span><span class="n">04</span>&nbsp; Контакты</span><span class="muted">Открыта к проектам</span></div>
+    <p class="contact__lead t-l" data-reveal>${nb('Есть задача — сайт, презентация, упаковка или интерфейс? Расскажите о ней в паре предложений.')}</p>
+    <a class="contact__big" href="${TG}" target="_blank" rel="noopener" data-reveal>Напишите мне <span class="arr">↗</span></a>
+    <div class="grid contact__links hr" data-reveal>
+      <div><span class="t-label muted">Telegram — быстрее всего</span><a href="${TG}" target="_blank" rel="noopener">@veronikactrlz</a></div>
+      <div><span class="t-label muted">Behance</span><a href="${BEHANCE}" target="_blank" rel="noopener">behance.net/veronikasa8b43</a></div>
+      <div><span class="t-label muted">Dprofile</span><a href="${DPROFILE}" target="_blank" rel="noopener">dprofile.ru/veronika</a></div>
+      <div><span class="t-label muted">Услуги</span><a href="price.html">Цены и этапы работы →</a></div>
+    </div>
+    <div class="contact__bottom hr"><span>© <span data-year>2026</span> Вероника Саттарова — графический и UI-дизайнер</span><button type="button" data-top>Наверх ↑</button></div>
   </div>
-  <div class="contacts" data-stagger>
-    <a class="tile tile--blue" href="${TG}" target="_blank" rel="noopener" data-reveal><span class="arr">↗</span><span class="label">Быстрее всего</span><span><span class="tile__t">Telegram</span><br><span class="tile__v">@veronikactrlz</span></span></a>
-    <a class="tile" href="${BEHANCE}" target="_blank" rel="noopener" data-reveal><span class="arr">↗</span><span class="label muted">Портфолио</span><span><span class="tile__t">Behance</span><br><span class="tile__v">behance.net/veronikasa8b43</span></span></a>
-    <a class="tile" href="${DPROFILE}" target="_blank" rel="noopener" data-reveal><span class="arr">↗</span><span class="label muted">Профиль</span><span><span class="tile__t">Dprofile</span><br><span class="tile__v">dprofile.ru/veronika</span></span></a>
-  </div>
-</section>`;
+</footer>`;
 }
+
+const shead = (n, label, aside, title, text) => `<div class="grid shead hr">
+    <div class="shead__label t-label"><span><span class="n">${n}</span>&nbsp; ${label}</span><span class="muted">${aside}</span></div>
+    ${title ? `<h2 class="shead__title t-xl" data-reveal>${title}</h2>` : ''}
+    ${text ? `<p class="shead__aside" data-reveal>${nb(text)}</p>` : ''}
+  </div>`;
 
 /* ---------------- главная ---------------- */
 function home() {
-  const workCard = (w, i) => `
-    <a class="work ${i < 2 ? 'work--wide' : 'work--third'}" href="${w.slug}.html" data-reveal>
-      <div class="work__img">${img(w.cover, { alt: `${w.title} — ${w.short}`, sizes: i < 2 ? '(max-width: 860px) 100vw, 50vw' : '(max-width: 860px) 100vw, 33vw', eager: i < 2 })}</div>
-      <div class="work__body">
+  const card = (w, i) => `
+    <a class="work ${i < 2 ? 'work--wide' : 'work--third'}" href="${w.slug}.html" data-reveal${i % 3 ? ` style="--d:${(i % 3) * 0.08}s"` : ''}>
+      <div class="work__img">${img(w.cover, { alt: `${w.title} — ${w.short}`, sizes: i < 2 ? '(max-width: 860px) 100vw, 50vw' : '(max-width: 860px) 100vw, 33vw' })}<span class="work__go" aria-hidden="true">↗</span></div>
+      <div class="work__cap">
         <h3 class="work__title">${w.title}</h3>
-        <span class="work__meta">${w.year}</span>
+        <span class="work__year">${w.year}</span>
         <p class="work__desc">${nb(w.desc)}</p>
-        <div class="work__foot"><span class="work__type">${w.type}</span><span class="work__go">Смотреть кейс <span class="arr arr--r">→</span></span></div>
+        <span class="work__type t-label muted">${w.type}</span>
       </div>
     </a>`;
 
   const services = [
-    ['Веб-дизайн и сайты на Tilda', 'Лендинги и продуктовые страницы: структура, дизайн, вёрстка в Zero Block, адаптив', 'от 35 000 ₽'],
-    ['UI-дизайн', 'Интерфейсы, компоненты и состояния, UI-kit и дизайн-системы', 'от 6 000 ₽', 'за экран'],
-    ['Бренд и айдентика', 'Логотип, палитра, типографика, паттерны, гайдлайн', 'от 40 000 ₽'],
-    ['Презентации и отчёты', 'Коммерческие и корпоративные, в том числе по брендбуку клиента', 'от 1 500 ₽', 'за слайд'],
-    ['Упаковка и печать', 'От концепции до файлов по требованиям типографии', 'от 35 000 ₽'],
+    ['Веб-дизайн и сайты на Tilda', 'Лендинги и продуктовые страницы: структура, дизайн, Zero Block, адаптив', 'от 35 000 ₽', '', '01'],
+    ['UI-дизайн', 'Интерфейсы, компоненты и состояния, UI-kit и дизайн-системы', 'от 6 000 ₽', 'за экран', '02'],
+    ['Бренд и айдентика', 'Логотип, палитра, типографика, паттерны, гайдлайн', 'от 40 000 ₽', '', '03'],
+    ['Презентации и отчёты', 'Коммерческие и корпоративные, в том числе по брендбуку клиента', 'от 1 500 ₽', 'за слайд', '04'],
+    ['Упаковка и печать', 'От концепции до файлов по требованиям типографии', 'от 35 000 ₽', '', '05'],
   ];
 
+  const caseLink = (slug, text) => `<a href="${slug}.html">${text}</a>`;
+
   const body = `
-<div class="frame">
-  <section class="hero" aria-label="О дизайнере">
-    <div class="hero__photo">
-      <span class="label">Портфолио · 2026</span>
-      ${img('me/portrait', { alt: 'Вероника Саттарова', sizes: '(max-width: 860px) 70vw, 36vw', eager: true })}
-    </div>
-    <div class="hero__main">
-      <div class="hero__intro">
-        <span class="status"><i></i>Открыта к проектам</span>
-        <div>
-          <h1 class="h1">Вероника Саттарова</h1>
-          <p class="hero__role" style="margin-top:12px">Графический и UI-дизайнер, 4 года опыта</p>
-        </div>
-        <p class="hero__text">${nb('Ищу подходящий способ рассказать о продукте или услуге: выстраиваю структуру, подбираю визуальный образ и делаю информацию понятной. Работаю с интерфейсами, сайтами, презентациями, упаковкой и настольными играми.')}</p>
-        <div class="hero__actions">
-          <a class="btn btn--blue" href="${TG}" target="_blank" rel="noopener">Написать в Telegram <span class="arr">↗</span></a>
-          <a class="btn btn--ghost" href="#work">Смотреть работы <span class="arr arr--r">↓</span></a>
-        </div>
-      </div>
-      <div class="facts">
-        <div><span class="label">Сейчас</span>Дизайнер интерфейсов в YUMAPOS</div>
-        <div><span class="label">Беру на фриланс</span>Сайты на Tilda, презентации, упаковку</div>
-        <div><span class="label">Направления</span>Бренд, веб, UI, коммуникации, упаковка</div>
-        <div><span class="label">Инструменты</span>Figma, Tilda, Photoshop, Illustrator, нейросети</div>
+<section class="hero wrap" aria-label="О дизайнере">
+  <div class="grid hero__meta hr t-label">
+    <div>Портфолио — 2026</div>
+    <div class="muted">Графический и UI-дизайнер, 4 года</div>
+    <div class="muted">Сейчас — дизайнер интерфейсов в YUMAPOS</div>
+    <div class="muted">Беру сайты, презентации, упаковку</div>
+  </div>
+  <div class="hero__stage">
+    <h1 class="hero__name t-display"><span class="line line--1"><span>Вероника</span></span><span class="line line--2"><span>Саттарова</span></span></h1>
+  </div>
+  <div class="hero__photo">${img('me/portrait', { alt: 'Вероника Саттарова', sizes: '(max-width: 860px) 82vw, 36vw', eager: true })}</div>
+  <div class="grid hero__bottom">
+    <div class="hero__intro">
+      <span class="status"><i></i>Открыта к проектам</span>
+      <p>${nb('Ищу подходящий способ рассказать о продукте: выстраиваю структуру, подбираю визуальный образ и делаю информацию понятной. Интерфейсы, сайты, презентации, упаковка и настольные игры.')}</p>
+      <div class="hero__actions">
+        <a class="btn btn--blue" href="${TG}" target="_blank" rel="noopener">Написать в Telegram <span class="arr">↗</span></a>
+        <a class="btn btn--ghost" href="#work">Смотреть работы <span class="arr arr--d">↓</span></a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="section" id="work">
-    <div class="shead">
-      <div><span class="label n">(01) Работы</span><h2 class="h2" data-reveal>Избранные проекты</h2></div>
-      <p data-reveal>${nb('Пять кейсов: дизайн-система продукта, сайт, упаковка, настольная игра и личный сервис.')}</p>
-    </div>
-    <div class="works">${WORKS.map(workCard).join('')}
-    </div>
-  </section>
+<section class="section wrap" id="work">
+  ${shead('01', 'Работы', '5 проектов', 'Избранные проекты', 'Дизайн-система продукта, сайт, упаковка, настольная игра и личный сервис.')}
+  <div class="grid works">${WORKS.map(card).join('')}
+  </div>
+</section>
 
-  <section class="section" id="about">
-    <div class="shead">
-      <div><span class="label n">(02) Обо мне</span><h2 class="h2" data-reveal>Опыт</h2></div>
-      <p data-reveal>${nb('In-house в продукте, консалтинг и собственные проекты.')}</p>
+<section class="night about" id="about">
+  <div class="wrap">
+    <div class="grid shead hr" style="padding-bottom:0"><div class="shead__label t-label"><span><span class="n">02</span>&nbsp; Обо мне</span><span class="muted">4 года в дизайне</span></div></div>
+    <div class="grid">
+      <p class="about__lead" data-reveal>${nb('Последние 4 года я работаю с презентациями, интерфейсами, дизайн-системами, сайтами на Tilda и настольными играми.')}</p>
+      <p class="about__sub" data-reveal>${nb('Люблю как чёткие задачи, в которых можно сосредоточиться на реализации, так и проекты, где есть пространство для собственных идей и поиска решений.')}</p>
+      <div class="clients" data-reveal aria-label="Проекты и презентации для">${['Авито', 'X5 Group', '«Пятёрочка»', '«Норникель»', '«Русагро»', 'Akkermann', 'Ленстройтрест', 'YUMAPOS'].map((c) => `<span class="chip">${c}</span>`).join('')}</div>
     </div>
-    <div class="about">
-      <div class="about__text" data-reveal>
-        <p class="lead">${nb('Последние 4 года я работаю с презентациями, интерфейсами, дизайн-системами, сайтами на Tilda и настольными играми.')}</p>
-        <p>${nb('Люблю как чёткие задачи, в которых можно сосредоточиться на реализации, так и проекты, где есть пространство для собственных идей и поиска решений.')}</p>
-        <div class="clients" aria-label="Проекты и презентации для">
-          ${['Авито', 'X5 Group', '«Пятёрочка»', '«Норникель»', '«Русагро»', 'Akkermann', 'Ленстройтрест', 'YUMAPOS'].map((c) => `<span class="chip">${c}</span>`).join('')}
-        </div>
+    <div class="exp">
+      <div class="grid exp__row hr" data-reveal>
+        <div class="exp__period">11.2024 — сейчас</div>
+        <div class="exp__co"><b>YUMAPOS</b><span>Дизайнер интерфейсов · B2B SaaS для ресторанов</span></div>
+        <ul class="exp__list">
+          <li>${nb('Визуальная идентичность: палитра, типографика, бренд-гайд, модульный паттерн, фотостиль')}</li>
+          <li>${caseLink('yumapos', 'Редизайн бэк-офиса и дизайн-система')}</li>
+          <li>${nb('Маркетинговый сайт на Tilda, презентации, рекламные материалы')}</li>
+          <li>${caseLink('smile', 'Сайт digital-агентства СМАИЛ')}</li>
+        </ul>
       </div>
-      <div class="exp rows">
-        <div class="exp__row" data-reveal>
-          <div class="exp__period">11.2024 — сейчас</div>
-          <div><div class="exp__co">YUMAPOS</div><div class="exp__role">Дизайнер интерфейсов · B2B SaaS для ресторанов</div>
-            <ul>
-              <li>${nb('Визуальная идентичность: палитра, типографика, бренд-гайд, модульный паттерн, фотостиль')}</li>
-              <li>${nb('Редизайн бэк-офиса и дизайн-система —')} <a href="yumapos.html">кейс</a></li>
-              <li>${nb('Маркетинговый сайт на Tilda, презентации, рекламные материалы')}</li>
-              <li>${nb('Сайт digital-агентства СМАИЛ —')} <a href="smile.html">кейс</a></li>
-            </ul></div>
-        </div>
-        <div class="exp__row" data-reveal>
-          <div class="exp__period">Лето 2023 — 11.2024</div>
-          <div><div class="exp__co">TSQ Consulting</div><div class="exp__role">Младший графический дизайнер · консалтинг</div>
-            <ul>
-              <li>${nb('Презентации для Авито, X5 Group, «Пятёрочки», «Норникеля», «Русагро», Akkermann — по брендбукам клиентов')}</li>
-              <li>${nb('Вёрстка отчётов, в том числе ESG')}</li>
-              <li>${nb('Настольная игра «Ценный путь» для Ленстройтреста —')} <a href="tsenny-put.html">кейс</a></li>
-            </ul></div>
-        </div>
-        <div class="exp__row" data-reveal>
-          <div class="exp__period">Зима — лето 2023</div>
-          <div><div class="exp__co">Фриланс и пет-проекты</div><div class="exp__role">Упаковка, презентации, продукт</div>
-            <ul>
-              <li>${nb('HT Reviews Drinks Collection — упаковка кваса и имиджевая кампания —')} <a href="kvas.html">кейс</a></li>
-              <li>${nb('Liora Energy — презентации, обложки для соцсетей; Фермент Плюс — упаковка')}</li>
-              <li>${nb('Studyspace — личный планер обучения —')} <a href="studyspace.html">кейс</a></li>
-            </ul></div>
-        </div>
+      <div class="grid exp__row hr" data-reveal>
+        <div class="exp__period">Лето 2023 — 11.2024</div>
+        <div class="exp__co"><b>TSQ Consulting</b><span>Младший графический дизайнер · консалтинг</span></div>
+        <ul class="exp__list">
+          <li>${nb('Презентации для Авито, X5 Group, «Пятёрочки», «Норникеля», «Русагро», Akkermann — по брендбукам клиентов')}</li>
+          <li>${nb('Вёрстка отчётов, в том числе ESG')}</li>
+          <li>${caseLink('tsenny-put', 'Настольная игра «Ценный путь» для Ленстройтреста')}</li>
+        </ul>
+      </div>
+      <div class="grid exp__row hr" data-reveal>
+        <div class="exp__period">Зима — лето 2023</div>
+        <div class="exp__co"><b>Фриланс и пет-проекты</b><span>Упаковка, презентации, продукт</span></div>
+        <ul class="exp__list">
+          <li>${caseLink('kvas', 'HT Reviews Drinks Collection — упаковка кваса')}</li>
+          <li>${nb('Liora Energy — презентации и обложки для соцсетей')}</li>
+          <li>${nb('Фермент Плюс — упаковка и визуальная система')}</li>
+          <li>${caseLink('studyspace', 'Studyspace — личный планер обучения')}</li>
+        </ul>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="section" id="services">
-    <div class="shead">
-      <div><span class="label n">(03) Услуги</span><h2 class="h2" data-reveal>Чем могу помочь</h2></div>
-      <p data-reveal>${nb('Ориентировочные цены. Точную стоимость назову после короткого брифа.')}</p>
-    </div>
-    <div class="rows">
-      <div class="svc svc--head label"><span>№</span><span>Направление</span><span class="svc__d">Что входит</span><span style="text-align:right">Стоимость</span></div>
-      ${services.map(([t, d, p, u], i) => `<div class="svc" data-reveal><span class="n s">(0${i + 1})</span><span class="svc__t">${t}</span><span class="svc__d">${nb(d)}</span><span class="svc__p">${p}${u ? `<small>${u}</small>` : ''}</span></div>`).join('\n      ')}
-      <a class="more" href="price.html"><span>Все услуги, сроки, этапы работы и ответы на вопросы</span><span class="arr arr--r">→</span></a>
-    </div>
-  </section>
-
-  ${contactsBlock()}
-</div>`;
+<section class="section wrap" id="services">
+  ${shead('03', 'Услуги', 'Цены ориентировочные', 'Чем могу помочь', 'Точную стоимость и сроки назову после короткого брифа.')}
+  <div>
+    ${services.map(([t, d, p, u, g], i) => `<a class="grid svc hr" href="price.html#g${g}" data-reveal><span class="svc__n t-label n">0${i + 1}</span><span class="svc__t">${t}</span><span class="svc__d">${nb(d)}</span><span class="svc__p">${p}${u ? `<small>${u}</small>` : ''}</span></a>`).join('\n    ')}
+    <a class="svc-more hr" href="price.html"><span>Все услуги, сроки, этапы работы и ответы на вопросы</span><span class="arr arr--r">→</span></a>
+  </div>
+</section>`;
   return layout({ file: 'index.html', title: 'Вероника Саттарова — графический и UI-дизайнер', description: 'Графический и UI-дизайнер: интерфейсы и дизайн-системы, сайты на Tilda, презентации, упаковка и настольные игры. 4 года опыта.', body, current: '', ogImage: 'yuma/cover' });
 }
 
@@ -295,35 +268,26 @@ function casePage(slug, c) {
   const w = WORKS[i];
   const prev = WORKS[(i - 1 + WORKS.length) % WORKS.length];
   const next = WORKS[(i + 1) % WORKS.length];
-  const meta = c.meta.slice(0, 4);
-  const toc = [...c.body.matchAll(/<section id="(s\d+)">\s*<div class="sec-title"[^>]*><span class="n">(\d+)<\/span><h2>(.*?)<\/h2>/g)].map((m) => [m[2], m[3], m[1]]);
   const body = `
-<div class="frame">
-  <div class="crumbs"><a href="index.html#work">← Все работы</a><nav aria-label="Соседние кейсы"><a href="${prev.slug}.html">← ${prev.title}</a><a href="${next.slug}.html">${next.title} →</a></nav></div>
-  <header class="case-head">
-    <span class="label n">Кейс ${w.n} / 05 · ${w.type}</span>
-    <h1 class="h1" data-reveal>${c.h1 || w.title}</h1>
-    <p class="lead" data-reveal>${nb(c.lead)}</p>
-  </header>
-  <dl class="meta">
-    ${meta.map(([k, v]) => `<div><dt class="label">${k}</dt><dd>${v}</dd></div>`).join('\n    ')}
-  </dl>
-  <div class="case-cover">${c.cover}</div>
-  <div class="case">
-    <aside class="toc" aria-label="Разделы кейса"><div class="toc__in">
-      <span class="label">Содержание</span>
-      ${toc.map(([n, label, id]) => `<a href="#${id}"><span class="n">${n}</span><span>${label}</span></a>`).join('\n      ')}
-      <a class="btn btn--blue" href="${TG}" target="_blank" rel="noopener" style="display:flex;grid-template-columns:none">Обсудить проект <span class="arr">↗</span></a>
-    </div></aside>
-    <div class="case-main">
+<div class="wrap"><div class="crumbs hr"><a href="index.html#work">← Все работы</a><nav aria-label="Соседние кейсы"><a href="${prev.slug}.html">← ${prev.title}</a><a href="${next.slug}.html">${next.title} →</a></nav></div></div>
+<header class="wrap grid case-head">
+  <h1 class="t-xxl" data-reveal>${c.h1 || w.title}<span class="sup">${w.n}</span></h1>
+  <p class="t-l" data-reveal style="--d:.08s">${nb(c.lead)}</p>
+</header>
+<div class="wrap"><dl class="grid meta hr" data-stagger>
+  ${c.meta.slice(0, 4).map(([k, v]) => `<div data-reveal><dt class="t-label">${k}</dt><dd>${v}</dd></div>`).join('\n  ')}
+</dl></div>
+<div class="wrap cover">${c.cover}</div>
 ${c.body}
+<div class="wrap">
+  <a class="next" href="${next.slug}.html" data-reveal>
+    <div class="grid next__row hr">
+      <div class="next__label t-label"><span>Следующий проект</span><span>${next.n} / 05</span></div>
+      <div class="next__title">${next.title} <span class="arr arr--r">→</span></div>
+      <div class="next__img">${img(next.cover, { alt: next.title, sizes: '(max-width: 860px) 100vw, 33vw' })}</div>
     </div>
-  </div>
-  <div class="pager">
-    <a href="${prev.slug}.html">${img(prev.cover, { alt: '', sizes: '120px' })}<span><span class="label">← Предыдущий</span><b>${prev.title}</b></span></a>
-    <a href="${next.slug}.html">${img(next.cover, { alt: '', sizes: '120px' })}<span><span class="label">Следующий →</span><b>${next.title}</b></span></a>
-  </div>
-  ${contactsBlock()}
+  </a>
+  <a class="prev-link" href="${prev.slug}.html">← Предыдущий: ${prev.title}</a>
 </div>`;
   return layout({ file: slug + '.html', title: `${w.title} — ${w.short} · Вероника Саттарова`, description: c.lead, body, current: 'work', ogImage: w.cover });
 }
@@ -425,10 +389,8 @@ CASES.kvas = {
         fig('kvas/knight-apple', { col: 'c-6', n: '08.', cap: 'Рыцарь Лесного королевства диких яблонь.', d: .1, cls: 'push' }),
         fig('kvas/knight-melon', { col: 'c-6', n: '09.', cap: 'Рыцарь Южного солнечного королевства.' }),
         fig('kvas/knight-pinkman', { col: 'c-6', n: '10.', cap: 'Рыцарь Королевства розового шторма.', d: .1, cls: 'push' }),
-        fig('kvas/model-1', { col: 'c-6', n: '11.', cap: 'Лист образа: доспех и портрет.' }),
+        fig('kvas/model-1', { col: 'c-6', n: '11.', cap: 'Лист образа: доспех в полный рост и портрет в профиль.' }),
         fig('kvas/model-2', { col: 'c-6', n: '12.', cap: 'Лист образа.', d: .1 }),
-        fig('kvas/model-3', { col: 'c-6', n: '13.', cap: 'Лист образа.' }),
-        fig('kvas/model-4', { col: 'c-6', n: '14.', cap: 'Лист образа.', d: .1 }),
       )}</div>` }),
     block('05', 'Имиджевые сцены', LEAD('Турнирная легенда получила продолжение за пределами упаковки.') +
       P('Серия сцен, объединённых атмосферой средневекового королевства: тост победителей, выезд на турнир, битва, привал в шатре.'),
@@ -443,10 +405,8 @@ CASES.kvas = {
       { after: `<div class="wrap">${figs(
         fig('kvas/still-velvet', { col: 'c-5', n: '19.', cap: 'Банки на бархатных постаментах.' }),
         fig('kvas/hand-can', { col: 'c-7', n: '20.', cap: 'Рука в латной перчатке и банка «Виноград-мята».', d: .1 }),
-        fig('kvas/still-grape', { col: 'c-6', n: '21.', cap: 'Виноград-мята.' }),
         fig('kvas/still-all', { col: 'c-6', n: '22.', cap: 'Вся коллекция.', d: .1 }),
         fig('kvas/still-pinkman', { col: 'c-6', n: '23.', cap: 'Pinkman.' }),
-        fig('kvas/goblet', { col: 'c-6', n: '24.', cap: 'Кубок короля.', d: .1 }),
       )}</div>` }),
     block('07', 'Раскладки', LEAD('Шаблоны для публикаций: арки, рамки и вензели.') +
       `<div class="note"><b>Нейросети</b><span>${nb('Все изображения и иллюстрации для упаковок сделаны с помощью нейросетей: иллюстрации — в Midjourney, фотографии — в Nano Banana. Дальше — ретушь и сборка в Photoshop.')}</span></div>`,
@@ -455,8 +415,6 @@ CASES.kvas = {
         fig('kvas/layout-apple-melon', { col: 'c-6', n: '26.', cap: 'Двойное яблоко и Арбуз-дыня.', d: .1 }),
         fig('kvas/layout-pinkman', { col: 'c-6', n: '27.', cap: 'Pinkman.' }),
         fig('kvas/layout-tent', { col: 'c-6', n: '28.', cap: 'Сцена в шатре.', d: .1 }),
-        fig('kvas/layout-still', { col: 'c-6', n: '29.', cap: 'Натюрморт.' }),
-        fig('kvas/layout-still-2', { col: 'c-6', n: '30.', cap: 'Натюрморт.', d: .1 }),
       )}</div>` }),
     block('08', 'Результат', LEAD('Визуальный образ коллекции вышел за пределы упаковки.') +
       P('Разработаны дизайн упаковки, образы моделей и серия имиджевых сцен, объединённых атмосферой средневекового королевства. У каждого вкуса появился свой герой, а турнирная легенда получила продолжение в серии сцен.')),
@@ -674,13 +632,13 @@ const PRICES = [
   ] },
 ];
 
-const redirect = (to) => `<!doctype html><html lang="ru"><head><meta charset="utf-8"><title>Переадресация…</title><meta http-equiv="refresh" content="0; url=${to}"><link rel="canonical" href="${SITE}${to}"><meta name="robots" content="noindex"></head><body><a href="${to}">${to}</a></body></html>
-`;
+const redirect = (to) => `<!doctype html><html lang="ru"><head><meta charset="utf-8"><title>Переадресация…</title><meta http-equiv="refresh" content="0; url=${to}"><link rel="canonical" href="${SITE}${to}"><meta name="robots" content="noindex"></head><body><a href="${to}">${to}</a></body></html>\n`;
+
 // мета «Ценного пути» — 4 ячейки в строку
 CASES['tsenny-put'].meta = [
   ['Год', '2024 · 3 месяца'],
   ['Заказчик', 'Ленстройтрест'],
-  ['Роль', 'Концепция игровых карт, подготовка к печати'],
+  ['Роль', 'Концепция игровых карт, подготовка материалов к печати'],
   ['Команда', 'TSQ Consulting, 6 человек; фишки — мастерская «Легко-Легко»'],
 ];
 
@@ -694,60 +652,62 @@ const FAQ = [
 
 function pricePage() {
   const groups = PRICES.map((g) => `
-    <div class="group-title"><span class="n s">(${g.n})</span><h2>${nb(g.t)}</h2><p>${nb(g.d)}</p></div>
-    <div class="price price--head label"><span>Задача</span><span class="price__d">Что входит</span><span>Срок</span><span style="text-align:right">Стоимость</span></div>
-    ${g.rows.map(([t, d, time, p, unit]) => `<div class="price"><span class="price__t">${nb(t)}</span><span class="price__d">${nb(d)}</span><span class="price__time">${time}</span><span class="price__p">${p}${unit ? `<small>${unit}</small>` : ''}</span></div>`).join('\n    ')}`).join('');
+<section class="pgroup wrap" id="g${g.n}">
+  <div class="grid pgroup__row hr">
+    <div class="pgroup__head" data-reveal><span class="t-label"><span class="n">${g.n}</span>&nbsp; Направление</span><h2>${nb(g.t)}</h2><p>${nb(g.d)}</p></div>
+    <div class="pgroup__table" data-reveal>
+      <div class="price price--head t-label"><span>Задача</span><span class="price__d">Что входит</span><span>Срок</span><span style="text-align:right">Стоимость</span></div>
+      ${g.rows.map(([t, d, time, p, unit]) => `<div class="price"><span class="price__t">${nb(t)}</span><span class="price__d">${nb(d)}</span><span class="price__time">${time}</span><span class="price__p">${p}${unit ? `<small>${unit}</small>` : ''}</span></div>`).join('\n      ')}
+    </div>
+  </div>
+</section>`).join('');
 
   const steps = [
     ['Бриф', 'Обсуждаем задачу, аудиторию, сроки и примеры, которые нравятся.'],
     ['Оценка', 'Фиксирую объём, этапы, стоимость и сроки.'],
     ['Концепция', 'Показываю направление и ключевые экраны или макеты.'],
-    ['Доработка', 'Развиваю решение на все материалы, вношу правки.'],
-    ['Передача', 'Исходники в Figma, файлы для печати или опубликованный сайт.'],
+    ['Доработка и передача', 'Развиваю решение на все материалы, вношу правки, отдаю исходники, файлы для печати или опубликованный сайт.'],
   ];
 
   const body = `
-<div class="frame">
-  <div class="crumbs"><a href="index.html">← Главная</a><span class="muted">Цены ориентировочные</span></div>
-  <header class="case-head">
-    <span class="label n">(03) Услуги и цены</span>
-    <h1 class="h1" data-reveal>Услуги и цены</h1>
-    <p class="lead" data-reveal>${nb('Цены указаны «от». Точную стоимость и сроки назову после короткого брифа — они зависят от объёма, срочности и исходных материалов.')}</p>
-    <div data-reveal><a class="btn btn--blue" href="${TG}" target="_blank" rel="noopener">Обсудить задачу в Telegram <span class="arr">↗</span></a></div>
-  </header>
-  <section class="section">${groups}
-  </section>
-  <section class="section">
-    <div class="shead"><div><span class="label n">Этапы</span><h2 class="h2" data-reveal>Как проходит работа</h2></div><p data-reveal>${nb('Вы всегда знаете, на каком этапе проект и что будет дальше.')}</p></div>
-    <div class="steps" data-stagger>
-      ${steps.map(([t, d], i) => `<div class="step" data-reveal><span class="n">(0${i + 1})</span><b>${t}</b><p>${nb(d)}</p></div>`).join('\n      ')}
+<div class="wrap"><div class="crumbs hr"><a href="index.html">← Главная</a><span class="muted">Цены ориентировочные</span></div></div>
+<header class="wrap grid case-head">
+  <h1 class="t-xxl" data-reveal>Услуги и цены<span class="sup">03</span></h1>
+  <p class="t-l" data-reveal style="--d:.08s">${nb('Цены указаны «от». Точную стоимость и сроки назову после короткого брифа — они зависят от объёма, срочности и исходных материалов.')}</p>
+  <div data-reveal style="grid-column:1/-1;margin-top:clamp(24px,3vw,40px)"><a class="btn btn--blue" href="${TG}" target="_blank" rel="noopener">Обсудить задачу в Telegram <span class="arr">↗</span></a></div>
+</header>
+<div style="height:clamp(30px,4vw,60px)"></div>
+${groups}
+<section class="night" style="margin-top:clamp(100px,12vw,180px);padding:clamp(80px,10vw,150px) 0">
+  <div class="wrap">
+    ${shead('', 'Как проходит работа', '4 шага', 'От брифа до готовых файлов', 'Вы всегда знаете, на каком этапе проект и что будет дальше.').replace('<span class="n"></span>&nbsp; ', '')}
+    <div class="grid steps hr" data-stagger>
+      ${steps.map(([t, d], i) => `<div class="step" data-reveal><span class="t-label n">0${i + 1}</span><b>${t}</b><p>${nb(d)}</p></div>`).join('\n      ')}
     </div>
-  </section>
-  <section class="section">
-    <div class="shead"><div><span class="label n">Вопросы</span><h2 class="h2" data-reveal>Вопрос — ответ</h2></div><p data-reveal>${nb('Не нашли свой вопрос — напишите, отвечу лично.')}</p></div>
-    <div class="faq">
-      ${FAQ.map(([q, a], i) => `<details${i === 0 ? ' open' : ''}><summary><span class="n s">(0${i + 1})</span><span>${nb(q)}</span></summary><div class="ans">${nb(a)}</div></details>`).join('\n      ')}
+  </div>
+</section>
+<section class="section wrap" id="faq">
+  <div class="grid pgroup__row hr">
+    <div class="pgroup__head" data-reveal><span class="t-label">Вопросы</span><h2>Вопрос — ответ</h2><p>${nb('Не нашли свой вопрос — напишите, отвечу лично.')}</p></div>
+    <div class="faq" data-reveal>
+      ${FAQ.map(([q, a], i) => `<details${i === 0 ? ' open' : ''}><summary><span>${nb(q)}</span></summary><div class="ans">${nb(a)}</div></details>`).join('\n      ')}
     </div>
-  </section>
-  ${contactsBlock()}
-</div>`;
+  </div>
+</section>`;
   return layout({ file: 'price.html', title: 'Услуги и цены — Вероника Саттарова, дизайнер', description: 'Ориентировочные цены на дизайн: сайты на Tilda, UI и дизайн-системы, айдентика, презентации, упаковка и настольные игры.', body, current: 'price' });
 }
 
 function notFound() {
   const body = `
-<div class="frame">
-  <section class="nf">
-    <span class="label n">Ошибка 404</span>
-    <h1 class="h1">Такой страницы нет</h1>
-    <p class="lead muted-2">${nb('Возможно, она переехала. Начните с главной или посмотрите работы.')}</p>
-    <div class="hero__actions"><a class="btn" href="index.html">На главную</a><a class="btn btn--ghost" href="index.html#work">Все работы</a></div>
-  </section>
-</div>`;
+<section class="nf wrap">
+  <span class="t-label n">Ошибка 404</span>
+  <h1 class="t-xxl">Такой страницы нет</h1>
+  <p class="t-l muted">${nb('Возможно, она переехала. Начните с главной или посмотрите работы.')}</p>
+  <div class="hero__actions"><a class="btn" href="index.html">На главную</a><a class="btn btn--ghost" href="index.html#work">Все работы</a></div>
+</section>`;
   return layout({ file: '404.html', title: 'Страница не найдена — Вероника Саттарова', description: 'Страница не найдена.', body, current: '' })
     .replace('<head>', '<head>\n<base href="/veronikasattarova-portfolio-2026/">');
 }
-
 
 /* ---------------- запись ---------------- */
 const write = (f, s) => { fs.writeFileSync(path.join(DOCS, f), s); console.log('→', f); };

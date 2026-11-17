@@ -3,8 +3,32 @@
   var html = document.documentElement;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function loaded() { html.classList.remove('is-entering'); }
-  if (document.readyState !== 'loading') requestAnimationFrame(loaded); else document.addEventListener('DOMContentLoaded', function () { requestAnimationFrame(loaded); });
+  function loaded() { requestAnimationFrame(function () { html.classList.remove('is-entering'); html.classList.add('is-loaded'); }); }
+  if (document.readyState !== 'loading') loaded(); else document.addEventListener('DOMContentLoaded', loaded);
+
+  /* Шапка прячется при скролле вниз и возвращается при скролле вверх */
+  var header = document.querySelector('.header'), lastY = window.scrollY;
+  window.addEventListener('scroll', function () {
+    var y = window.scrollY;
+    var menuOpen = document.querySelector('.mnav.is-open');
+    if (header && !menuOpen) header.classList.toggle('is-hidden', y > lastY && y > 300);
+    lastY = y;
+  }, { passive: true });
+
+  /* Главная: пункт меню подсвечивается для раздела на экране */
+  var navLinks = document.querySelectorAll('.nav a[href*="#"]');
+  if (navLinks.length && 'IntersectionObserver' in window) {
+    var byId = {};
+    navLinks.forEach(function (a) { var id = a.getAttribute('href').split('#')[1]; if (document.getElementById(id)) byId[id] = a; });
+    var navSpy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        var a = byId[en.target.id]; if (!a) return;
+        if (en.isIntersecting) { navLinks.forEach(function (x) { if (x.dataset.spy) x.removeAttribute('aria-current'); }); a.setAttribute('aria-current', 'true'); a.dataset.spy = '1'; }
+        else if (a.dataset.spy) a.removeAttribute('aria-current');
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    Object.keys(byId).forEach(function (id) { navSpy.observe(document.getElementById(id)); });
+  }
 
   /* Переход между страницами — там, где нет View Transitions между документами */
   if (html.classList.contains('no-vt') && !reduce) {
